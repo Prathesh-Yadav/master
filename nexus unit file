@@ -1,4 +1,6 @@
 #/etc/systemd/system
+#Nexus url :- https://download.sonatype.com/nexus/3/nexus-3.72.0-04-unix.tar.gz
+#sonarqubeurl :- https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-9.1.0.47736.zip
 [Unit]
 Description=nexus service
 After=network.target
