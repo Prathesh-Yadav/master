@@ -1,0 +1,16 @@
+#/etc/systemd/system
+[Unit]
+Description=nexus service
+After=network.target
+
+[Service]
+Type=forking
+LimitNOFILE=65536
+ExecStart=/home/nexus/nexus-3.72.0-04/bin/nexus start
+ExecStop=/home/nexus/nexus-3.72.0-04/bin/nexus stop
+User=nexus
+Restart=on-abort
+TimeoutSec=600
+
+[Install]
+WantedBy=multi-user.target
