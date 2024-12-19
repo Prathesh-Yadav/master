@@ -1,0 +1,10 @@
+---
+region: "us-east-1"
+key_name: "mount"
+instance_type: "t2.micro"
+image_id: "ami-01816d07b1128cd2d"  # Amazon Linux 2023 (64-bit, x86)
+count: 1
+vpc_subnet_id: "subnet-0e12e207a1819a6d8"
+security_group: "sg-05e7dafefd15a2b44"
+instance_name: "MyEC2Instance"  # Optional: add a Name tag for the instance
+

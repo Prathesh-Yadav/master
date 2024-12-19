@@ -1,0 +1,23 @@
+---
+- name: Launch EC2 instance
+  amazon.aws.ec2:
+    aws_access_key: "{{ aws_access_key }}"
+    aws_secret_key: "{{ aws_secret_key }}"
+    region: "{{ region }}"  # Dynamically passed from vars
+    key_name: "{{ key_name }}"  # Dynamically passed from vars
+    instance_type: "{{ instance_type }}"  # Dynamically passed from vars
+    image_id: "{{ image_id }}"  # Dynamically passed from vars
+    count: "{{ count }}"  # Dynamically passed from vars
+    vpc_subnet_id: "{{ vpc_subnet_id }}"  # Dynamically passed from vars
+    security_group_ids:
+      - "{{ security_group }}"  # Use security_group_ids instead of security_group
+    associate_public_ip_address: yes
+    wait: yes
+    instance_tags:
+      Name: "{{ instance_name }}"  # Added Name tag dynamically from vars
+  register: ec2_info
+
+- name: Display EC2 instance information
+  debug:
+    var: ec2_info.instances
+

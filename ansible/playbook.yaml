@@ -1,0 +1,10 @@
+---
+- name: Launch EC2 instance
+  hosts: localhost
+  collections:
+    - amazon.aws  # Include the amazon.aws collection
+  vars_files:
+    - group_vars/cred.yaml  # Ensure this file contains aws_access_key and aws_secret_key
+  roles:
+    - createinstance
+
