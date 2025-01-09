@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  repository: 13.232.66.73:5000/mercedezcar/mercedez
+  repository: 52.66.116.134:5000/mercedezcar/mercedez
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: "1.1"
