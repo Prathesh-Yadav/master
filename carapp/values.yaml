@@ -35,7 +35,7 @@ securityContext: {}
 
 service:
   type: NodePort
-  port: 80
+  port: 8080
   nodePort: 30080
 
 ingress:
@@ -73,7 +73,7 @@ affinity: {}
 livenessProbe:
   httpGet:
     path: /health  # Change this to match your app's health check endpoint
-    port: 80
+    port: 8080
     # Use the same port as the NodePort service.
   initialDelaySeconds: 30  # Wait for 30 seconds before starting health checks
   periodSeconds: 10       # Check every 10 seconds
@@ -81,7 +81,7 @@ livenessProbe:
 readinessProbe:
   httpGet:
     path: /health  # Change this to match your app's health check endpoint
-    port: 80
+    port: 8080
     # Use the same port as the NodePort service.
   initialDelaySeconds: 15  # Check readiness after 15 seconds
   periodSeconds: 10       # Check every 10 seconds
@@ -89,7 +89,7 @@ readinessProbe:
 startupProbe:
   httpGet:
     path: /health
-    port: 80
+    port: 8080
   initialDelaySeconds: 60  # Increase this delay if your app takes time to start
   periodSeconds: 10
   failureThreshold: 30
