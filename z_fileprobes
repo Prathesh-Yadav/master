@@ -1,0 +1,95 @@
+# Default values for carapp.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: 52.66.116.134:5000/mercedezcar/mercedez
+  pullPolicy: IfNotPresent
+  tag: "1.1"
+
+imagePullSecrets: 
+  - name: nexus-secret
+
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  create: true
+  annotations: {}
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+service:
+  type: NodePort
+  port: 8080
+  nodePort: 30080
+
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+  hosts:
+    - host: chart-example.local
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+
+resources:
+  requests:
+    memory: "1Gi"
+    cpu: "500m"
+  limits:
+    memory: "2Gi"
+    cpu: "1"
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+# Liveness and Readiness Probes based on NodePort
+livenessProbe:
+  httpGet:
+    path: /health  # Change this to match your app's health check endpoint
+    port: 8080
+    # Use the same port as the NodePort service.
+  initialDelaySeconds: 30  # Wait for 30 seconds before starting health checks
+  periodSeconds: 10       # Check every 10 seconds
+
+readinessProbe:
+  httpGet:
+    path: /health  # Change this to match your app's health check endpoint
+    port: 8080
+    # Use the same port as the NodePort service.
+  initialDelaySeconds: 15  # Check readiness after 15 seconds
+  periodSeconds: 10       # Check every 10 seconds
+
+startupProbe:
+  httpGet:
+    path: /health
+    port: 8080
+  initialDelaySeconds: 60  # Increase this delay if your app takes time to start
+  periodSeconds: 10
+  failureThreshold: 30
