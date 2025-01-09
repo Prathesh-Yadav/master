@@ -79,3 +79,12 @@ readinessProbe:
     # Use the same port as the NodePort service.
   initialDelaySeconds: 15  # Check readiness after 15 seconds
   periodSeconds: 10       # Check every 10 seconds
+
+startupProbe:
+  httpGet:
+    path: /health
+    port: 80
+  initialDelaySeconds: 60  # Increase this delay if your app takes time to start
+  periodSeconds: 10
+  failureThreshold: 30
+
